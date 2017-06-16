@@ -2,52 +2,75 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="expires" content="0">
-    <title>html2Canvas demo</title>
-    <style>
-        *{margin: 0;padding: 0; box-sizing: border-box;}
-        .share-content{
-            width: 60vw;
-            border: 1px solid blue;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-        .share-content img{
-            width: 100%;
-        }
-    </style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>images</title>
+	<!-- html2canvas就是这样一款前端插件,它的原理是将Dom节点在Canvas里边画出来 -->
+	<script src="./images_files/html2canvas.js"></script>
+
+	<!-- 将canvas图片保存成图片 -->
+	<script src="./images_files/canvas2image.js"></script>
+	<script src="./images_files/base64.js"></script>
+	<style>
+		body{
+			font-family: 'Microsoft Yahei';
+		}
+		.text-center{
+			text-align: center;
+		}
+		#content {
+			padding: 20px;
+			border-radius: 3px;
+			width:550px;
+			border:1px gray solid;
+			overflow: hidden;
+		}
+		h2,p {
+			padding: 15px 0;
+		}
+		img {
+			width: 100%;
+			margin: 20px 0;
+		}
+		input,button {
+			padding: 5px 10px;
+			border: 1px solid #eee;
+		}
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#btnSave,
+		#Download {
+			margin: 10px 0 10px 26px;
+		}
+	</style>
 </head>
 
 <body>
-    <div class="share-content" id="shareContent">
-        <div class="text">
-            <code>英国首都伦敦西部一栋公寓楼14日凌晨突发大火，火灾死亡人数可能在60人以上，一些家庭全家遇难。伦敦警方正就此展开调查。
-英国首相在15日视察现场只接见消防员和警员却没有慰问民众的做法激起民愤。16日晚间，伦敦市民将到威斯敏斯特议会大厦前举
-行抗议活动。（央视记者 孔琳琳）</code>
-            <img src="http://p4.qhimg.com/t01ade62f61406d0061.webp" alt="">
-            <p style="padding: 20px;">英国首都伦敦西部一栋公寓楼14日凌晨突发大火，火灾死亡人数可能在60人以上，一些家庭全家遇难。伦敦警方正就此展开调查。
-英国首相在15日视察现场只接见消防员和警员却没有慰问民众的做法激起民愤。16日晚间，伦敦市民将到威斯敏斯特议会大厦前举
-行抗议活动。（央视记者 孔琳琳）</p>
-        </div>
-    </div>
-    <button class="btn-share" id="btnShare">截&nbsp;图</button>
+	<div id="content" >
+		<h2 class="text-center">jczzq</h2>
+		<p class="text-center">my htmlToCanvas demo</p>
+		<img src="/images_files/t01ade62f61406d0061.jpg" alt="">
+		<p>Hello world</p>
+		<p style="color:red;">注意：<br>
+			1.内含跨域图片不支持下载；<br>
+		</p>
+		<p>注意：内含跨域图片不支持下载</p>
+		<input type="text" >
+		<input type="button" value="提交">
+	</div>
+	<button id="btnSave" onclick="app.setListener()">转换成图片</button>
+	<div id="images">
 
-    <script src="./images_files/html2canvas.js"></script>
-    <script>
-        var main = {
-            init: function () {
-                main.setListener();
-            },
+	</div>
+	<button id="Download">Download</button>
+
+	<script>
+		var app = {
             //设置监听事件
             setListener: function () {
-                var btnShare = document.getElementById("btnShare");
-                btnShare.onclick = function () {
-                    main.htmlToCanvas(document.querySelector("#shareContent"));
-                }
+                this.htmlToCanvas(document.querySelector('#content'));
             },
             //获取像素密度
             getPixelRatio: function (context) {
@@ -68,8 +91,7 @@
 
                 var canvas = document.createElement('canvas');  //创建canvas 对象
                 var context = canvas.getContext('2d');
-                var scaleBy = main.getPixelRatio(context);  //获取像素密度的方法 (也可以采用自定义缩放比例)
-                console.log(scaleBy)
+                var scaleBy = this.getPixelRatio(context);  //获取像素密度的方法 (也可以采用自定义缩放比例)
                 canvas.width = width * scaleBy;   //这里 由于绘制的dom 为固定宽度，居中，所以没有偏移
                 canvas.height = (height + offsetTop) * scaleBy;  // 注意高度问题，由于顶部有个距离所以要加上顶部的距离，解决图像高度偏移问题
                 context.scale(scaleBy, scaleBy);
@@ -79,21 +101,35 @@
                     tainttest: true, //检测每张图片都已经加载完成
                     scale: scaleBy, // 添加的scale 参数
                     canvas: canvas, //自定义 canvas
-                    logging: true, //日志开关，发布的时候记得改成false
+                    logging: false, //日志开关，发布的时候记得改成false
                     width: width, //dom 原始宽度
                     height: height //dom 原始高度
                 };
                 html2canvas(shareContent, opts).then(function (canvas) {
-                    var body = document.getElementsByTagName("body");
-                    body[0].appendChild(canvas);
+					canvas.setAttribute('id', 'thecanvas');
+                    document.getElementById('images').appendChild(canvas);
                 });
             }
         };
+	</script>
+	<script>
+		document.getElementById('Download').onclick = function () {
+			var oCanvas = document.getElementById('thecanvas');
+			// 自动保存为png;获取图片资源
+			var img_data1 = Canvas2Image.saveAsPNG(oCanvas, true).getAttribute('src');
+			saveFile(img_data1, 'my-img');
+		}
+		// 保存文件
+		var saveFile = function(data, filename) {
+			var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+			save_link.href = data;
+			save_link.download = filename;
 
-        //最后运行代码
-        main.init();
-
-    </script>
+			var event = document.createEvent('MouseEvents');
+			event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+			save_link.dispatchEvent(event);
+		};
+	</script>
 </body>
 
 </html>
