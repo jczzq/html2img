@@ -2,70 +2,98 @@
 <html lang="en">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-	<title>images</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>html2img</title>
 	<!-- html2canvas就是这样一款前端插件,它的原理是将Dom节点在Canvas里边画出来 -->
 	<script src="./assets/html2canvas.js"></script>
-
+	<script src="http://192.168.1.103:8081/target/target-script-min.js#anonymous"></script>
 	<!-- 将canvas图片保存成图片 -->
 	<script src="./assets/canvas2image.js"></script>
 	<script src="./assets/base64.js"></script>
 	<style>
-		body{
-			font-family: 'Microsoft Yahei';
-		}
-		.text-center{
-			text-align: center;
-		}
-		#content {
-			padding: 20px;
-			border-radius: 3px;
-			width:550px;
-			border:1px gray solid;
-			overflow: hidden;
-		}
-		h2,p {
-			padding: 15px 0;
-		}
-		img {
+		*{ margin: 0; padding: 0; }
+		body{ font-family: 'Microsoft Yahei'; font-size: 14px; color: #6a6a6a; }
+		.text-center{ text-align: center; }
+		#content { border-radius: 3px; overflow: hidden; background-color: white; box-sizing: border-box; padding-bottom: 20px; }
+		#img-box{ margin-top: 50px; }
+		#img-box img {
 			width: 100%;
-			margin: 20px 0;
 		}
-		input,button {
-			padding: 5px 10px;
-			border: 1px solid #eee;
+		.wave-box{ position: relative; overflow: hidden; }
+		.wave-content {
+			position: absolute;
+			width: 100%;
+			top: 0;
+			left: 0;
+			z-index: 10086;
 		}
-		*{
-			margin: 0;
-			padding: 0;
+		.wave-back{
+			height: 400px;
+			background: url(./assets/breathe.gif) no-repeat;
+			background-size: cover;
+			background-position: center;
+			filter: blur(0) brightness(50%);
+			-webkit-filter: blur(0) brightness(50%);
 		}
-		#btnSave,
-		#Download {
-			margin: 10px 0 10px 26px;
-		}
+		h2{ color: white; margin-top: 100px;}
+		h2,p { padding: 5px 4vw; }
+		p.subcontent{ color: #ccc; }
+		#content img { width: 92%; margin: 10px 4vw; }
+		input,button { padding: 5px 10px; border: 1px solid #934699; font-family: 'Microsoft Yahei';}
+		button{ cursor: pointer; background-color: #934699; color: white; }
+		#btnSave,#Download { margin: 30px; }
 	</style>
 </head>
 
 <body>
-	<div id="content" >
-		<h2 class="text-center">jczzq</h2>
-		<p class="text-center">my htmlToCanvas demo</p>
-		<img src="./assets/t01ade62f61406d0061.jpg" alt="">
-		<p>Hello world</p>
-		<p style="color:red;">注意：<br>
-			1.内含跨域图片不支持下载；<br>
+	<div id="content">
+		<div class="wave-box">
+			<div class="wave-content">
+				<button id="btnSave" onclick="app.setListener()">转换成图片</button>
+				<h2 class="text-center">
+					HtmlToImg Demo
+				</h2>
+				<p class="text-center subcontent">by：jczzq</p>
+			</div>
+			<div class="wave-back"> </div>
+		</div>
+		<p>
+			《尼尔：机械纪元》除了懂人心的小姐姐2B以外，其自身的的游戏品质也延续了白金工作室的一贯水准，受到了玩家们的欢迎和喜爱，前段时间本作的销量也已突破了100万份。而玩家们的购买热情还不止于此，不少粉丝还希望体验一下前作《尼尔》的魅力，而SE也回应了玩家们的期待。
 		</p>
-		<p>注意：内含跨域图片不支持下载</p>
-		<input type="text" >
-		<input type="button" value="提交">
+		<img src="./assets/nier001.jpg" alt="">
+		<p>
+			Reddit网友lupianwolf近日发现了这个有趣的现象，他表示PS3版的《尼尔》光盘在欧洲区又重新印制并且上架了SE商店。不知道在其他地区会不会采取同样的举措。
+		</p>
+		<img src="./assets/nier002.jpg" alt="">
+		<p>
+			《尼尔》本身评价不一，销量也远远不及近日发售的《尼尔：机械纪元》，不过对于粉丝们来说，现在这也是个好机会尝试一下前作《尼尔》，对比、了解一下两部作品间的差异和联系。还能看看各位都很喜欢的扶她小姐姐卡伊奈。
+		</p>
+		<img src="./assets/nier003.jpg" alt="">
+		<p>
+			《尼尔》发售于2010年，登陆PS3/Xbox 360平台，由Cavia开发，日版和欧美地区发售的版本也存在着一定的差异，例如日版的主角是一位年轻人，而到了欧美地区则变成了一位相当粗犷的壮汉——前者在剧情中是为了拯救自己的妹妹，而后者则是为了拯救自己的女儿。
+		</p>
+		<img src="./assets/nier5.jpg" alt="">
+		<p>
+			故事发生在藤美学园，一个宁静的下午，主角小室孝正翘课在学校的天台上发呆。突然间学校受到了“它们”的袭击，被袭击的人死后复生，又成为了“它们”的伙伴。“不破坏它们的头部就不会停止活动...
+		</p>
+		<img src="./assets/vol16.png" alt="">
+		<p>
+			故事发生在藤美学园，一个宁静的下午，主角小室孝正翘课在学校的天台上发呆。突然间学校受到了“它们”的袭击，被袭击的人死后复生，又成为了“它们”的伙伴。“不破坏它们的头部就不会停止活动...
+		</p>
+		<img src="./assets/timg.jpg" alt="">
+		<p style="text-align: right">
+			<input type="text" > <button>评论</button>
+		</p>
+		<p style="color:red;">注意：<br>
+			1.不支持内含跨域图片<br>
+		</p>
 	</div>
-	<button id="btnSave" onclick="app.setListener()">转换成图片</button>
-	<div id="images">
+	<hr>
+	<div id="img-box">
 
 	</div>
-	<button id="Download">Download</button>
-
 	<script>
 		var app = {
             //设置监听事件
@@ -106,28 +134,23 @@
                     height: height //dom 原始高度
                 };
                 html2canvas(shareContent, opts).then(function (canvas) {
-					canvas.setAttribute('id', 'thecanvas');
-                    document.getElementById('images').appendChild(canvas);
+					var img_data1 = Canvas2Image.saveAsPNG(canvas, true).getAttribute('src');
+					saveFile(img_data1, 'my-img');
                 });
             }
         };
 	</script>
 	<script>
-		document.getElementById('Download').onclick = function () {
-			var oCanvas = document.getElementById('thecanvas');
-			// 自动保存为png;获取图片资源
-			var img_data1 = Canvas2Image.saveAsPNG(oCanvas, true).getAttribute('src');
-			saveFile(img_data1, 'my-img');
-		}
 		// 保存文件
 		var saveFile = function(data, filename) {
-			var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
-			save_link.href = data;
-			save_link.download = filename;
+			var img = document.createElement('img');
+			img.src = data;
+			document.getElementById('img-box').appendChild(img);
 
-			var event = document.createEvent('MouseEvents');
-			event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-			save_link.dispatchEvent(event);
+			// 下载图片
+			// var event = document.createEvent('Event');
+			// event.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+			// img.dispatchEvent(event);
 		};
 	</script>
 </body>
